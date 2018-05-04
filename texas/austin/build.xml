@@ -1,0 +1,24 @@
+<project name="HelloWorld" basedir=".">
+    <property name="src.dir" value="."/>
+    <property name="output.dir" value="output"/>
+    <property name="hw.jarfile" value="$HelloWorld.jar"/>
+    <target name="init">
+        <mkdir dir="${output.dir}"/>
+    </target>
+    <target name="compile" depends="init">
+        <javac srcdir="${src.dir}" destdir="${output.dir}" includeantruntime="false"/>
+    </target>
+    <target name="jar" depends="compile">
+        <jar destfile="${hw.jarfile}" basedir="${output.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="usa.texas.austin.HelloWorld"/>
+            </manifest>
+        </jar>
+    </target>
+    <target name="run" depends = "jar">
+        <java jar="${hw.jarfile}" fork="true"/>
+    </target>
+    <target name="clean">
+        <delete dir="${output.dir}"></delete>
+    </target>
+</project>
